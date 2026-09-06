@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Utsav Malik — Frontend Developer</title>
+<meta name="description" content="Utsav Malik, frontend developer specializing in heavy websites and complex workflows.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B1F14;
+    --panel:#12301F;
+    --panel-2:#0E2819;
+    --line:#1E3F2A;
+    --text:#E9EFE7;
+    --muted:#8FAF9B;
+    --muted-dim:#5C7A69;
+    --red:#D7402A;
+    --red-dim:#7A2419;
+    --red-glow:rgba(215,64,42,0.35);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.12;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{
+    max-width:840px;
+    margin:0 auto;
+    padding:0 28px;
+    position:relative;
+    z-index:1;
+  }
+
+  h1,h2,h3{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  a{color:inherit;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:rgba(11,31,20,0.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 0;
+  }
+  .nav-name{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:600;
+    font-size:17px;
+    letter-spacing:-0.01em;
+  }
+  .status{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    color:var(--muted);
+  }
+  .led{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--red);
+    box-shadow:0 0 0 0 var(--red-glow);
+    animation:pulse 2.4s infinite;
+    flex-shrink:0;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 var(--red-glow);}
+    70%{box-shadow:0 0 0 8px rgba(215,64,42,0);}
+    100%{box-shadow:0 0 0 0 rgba(215,64,42,0);}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .led{animation:none;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 72px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-tag{
+    font-size:14px;
+    color:var(--muted);
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(40px, 7vw, 68px);
+    margin-bottom:20px;
+  }
+  .hero h1 span{
+    color:var(--red);
+  }
+  .hero p{
+    max-width:52ch;
+    font-size:18px;
+    color:var(--muted);
+  }
+  .hero-links{
+    display:flex;
+    gap:16px;
+    margin-top:36px;
+    flex-wrap:wrap;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 22px;
+    border-radius:2px;
+    font-size:15px;
+    font-weight:500;
+    text-decoration:none;
+    border:1px solid var(--line);
+    transition:border-color 0.2s ease, background 0.2s ease;
+  }
+  .btn-primary{
+    background:var(--red);
+    border-color:var(--red);
+    color:#0B1F14;
+  }
+  .btn-primary:hover{
+    background:#c23a25;
+  }
+  .btn-secondary{
+    color:var(--text);
+  }
+  .btn-secondary:hover{
+    border-color:var(--muted-dim);
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{
+    padding:72px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .section-title{
+    font-size:28px;
+    margin-bottom:28px;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about p{
+    max-width:64ch;
+    color:var(--muted);
+    font-size:16px;
+    margin-bottom:16px;
+  }
+  .about p strong{
+    color:var(--text);
+    font-weight:600;
+  }
+
+  /* ---------- CAPABILITY / LOAD METER ---------- */
+  .capability-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    align-items:start;
+  }
+  @media (max-width:640px){
+    .capability-grid{grid-template-columns:1fr;}
+  }
+
+  .cap-list{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:22px;
+  }
+  .cap-list li{
+    border-left:2px solid var(--line);
+    padding-left:16px;
+  }
+  .cap-list h3{
+    font-size:17px;
+    margin-bottom:6px;
+  }
+  .cap-list p{
+    color:var(--muted);
+    font-size:15px;
+  }
+
+  .meter-box{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:24px;
+  }
+  .meter-label{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:10px;
+  }
+  .meter-track{
+    width:100%;
+    height:14px;
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    border-radius:2px;
+    overflow:hidden;
+    margin-bottom:8px;
+  }
+  .meter-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg, var(--red-dim), var(--red));
+    border-radius:2px;
+    transition:width 1.4s cubic-bezier(0.16,1,0.3,1);
+  }
+  .meter-fill.filled{
+    width:97%;
+  }
+  .meter-readout{
+    font-size:13px;
+    color:var(--red);
+  }
+  .meter-note{
+    margin-top:18px;
+    font-size:14px;
+    color:var(--muted);
+    line-height:1.6;
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    border-bottom:none;
+  }
+  .contact p{
+    color:var(--muted);
+    max-width:52ch;
+    margin-bottom:28px;
+  }
+  .contact-links{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .contact-link{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+    text-decoration:none;
+    font-size:16px;
+    transition:padding-left 0.2s ease;
+  }
+  .contact-link:hover{
+    padding-left:8px;
+    color:var(--red);
+  }
+  .contact-link .mono{
+    font-size:12px;
+    color:var(--muted-dim);
+    min-width:70px;
+  }
+
+  footer{
+    padding:32px 0 48px;
+    font-size:13px;
+    color:var(--muted-dim);
+  }
+
+  :focus-visible{
+    outline:2px solid var(--red);
+    outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-inner">
+    <div class="nav-name">Utsav Malik</div>
+    <div class="status"><span class="led"></span>Currently available for work</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-tag mono">$ frontend developer</div>
+    <h1>I build the websites<br>other devs call <span>heavy.</span></h1>
+    <p>Utsav Malik — a frontend developer who takes on the dense, high-load builds and workflows that most people would rather hand off. If it's heavy, it's mine.</p>
+    <div class="hero-links">
+      <a href="#contact" class="btn btn-primary">Get in touch</a>
+      <a href="#about" class="btn btn-secondary">More about me</a>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about">
+  <div class="wrap">
+    <h2 class="section-title">About</h2>
+    <p>I'm <strong>Utsav Malik</strong>, a frontend developer. My work centers on <strong>heavy websites</strong> — large, complex, resource-intensive builds — and the <strong>workflows</strong> that keep them running smoothly under real-world load.</p>
+    <p>My speciality is simple to state and hard to fake: I'm a <strong>heavy tasker</strong>. I hold a lot of moving parts at once and keep pushing them forward without dropping any of them.</p>
+  </div>
+</section>
+
+<section id="capability">
+  <div class="wrap">
+    <h2 class="section-title">Capability</h2>
+    <div class="capability-grid">
+      <ul class="cap-list">
+        <li>
+          <h3>Heavy websites</h3>
+          <p>Comfortable in dense, feature-rich builds that stay fast and stable as they grow.</p>
+        </li>
+        <li>
+          <h3>Complex workflows</h3>
+          <p>I design and wire up multi-step frontend workflows that hold together under real use.</p>
+        </li>
+        <li>
+          <h3>Heavy tasking</h3>
+          <p>My core trait — running several demanding threads of work in parallel without losing quality.</p>
+        </li>
+      </ul>
+
+      <div class="meter-box">
+        <div class="meter-label">
+          <span>Task load</span>
+          <span class="meter-readout mono" id="meterReadout">0%</span>
+        </div>
+        <div class="meter-track">
+          <div class="meter-fill" id="meterFill"></div>
+        </div>
+        <div class="meter-note">Most people's capacity redlines here. This is where I do my best work.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <h2 class="section-title">Contact</h2>
+    <p>Have a heavy project or a workflow that needs untangling? I'd like to hear about it.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:hello@utsavmalik.dev"><span class="mono">email</span> hello@utsavmalik.dev</a>
+      <a class="contact-link" href="https://github.com/" target="_blank" rel="noopener"><span class="mono">github</span> github.com/utsavmalik</a>
+      <a class="contact-link" href="https://linkedin.com/" target="_blank" rel="noopener"><span class="mono">linkedin</span> linkedin.com/in/utsavmalik</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    © <span id="year"></span> Utsav Malik
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const fill = document.getElementById('meterFill');
+  const readout = document.getElementById('meterReadout');
+  const target = 97;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        fill.classList.add('filled');
+        let current = 0;
+        const step = () => {
+          current += 2;
+          if (current > target) current = target;
+          readout.textContent = current + '%';
+          if (current < target) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(document.querySelector('.meter-box'));
+</script>
+
+</body>
+</html>
